@@ -23,11 +23,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `db_file` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `url` varchar(300) NOT NULL,
+  `url` varchar(1000) NOT NULL,
   `upload_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ip` varchar(30) NOT NULL,
   `size` int(11) NOT NULL,
-  `text` varchar(300) NOT NULL,
+  `text` varchar(1000) NOT NULL,
   `ext` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
