@@ -9,13 +9,32 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript" src="js/particleground.min.js"></script>
-	<script> $(document).ready(function() {
+	
+	<script type="text/javascript"> 
+	var fileInput = null,
+		urlInput = null;
+
+	$(document).ready(function() {
 	  $('#upload').particleground({
 	    dotColor: '#1a7269',
 	    lineColor: '#1a7269'
 	  });
-	}); </script>
+	  document.getElementById("uploadBtn").disabled = true;
+	  fileInput = document.getElementById("inputFile")
+	  urlInput = document.getElementById("url")
+	}); 
+
+	function validateField(){
+		var x = urlInput.className;
+		if(fileInput.value || (urlInput.value && (x.indexOf('invalid') == -1 ))){
+			document.getElementById("uploadBtn").disabled = false;
+		}else{
+			document.getElementById("uploadBtn").disabled = true;
+		}
+	}
+	</script>
 	<script src="js/toastr.min.js"> </script>
+
 	
         <title>Upload a file</title>
 
@@ -149,7 +168,7 @@ function HumanSize($Bytes)
 		<center><h1> FileUpload 176 </h1></center>	
 		    <form action="#" method="POST" enctype="multipart/form-data">
 		        <div class="file-field input-field" >
-		            <input class="file-path validate" type="text" style="width: 50%;"/>
+		            <input class="file-path validate" id="inputFile" type="text" style="width: 50%;" onchange="validateField()"/>
 
 		            <div class="btn">
 		                <span>File</span>
@@ -158,12 +177,12 @@ function HumanSize($Bytes)
 		        </div>
 		        <div class="row">
 		            <div class="input-field col s12">
-		                <input name="url" id="url" type="url" class="validate">
+		                <input name="url" id="url" type="url" class="validate" oninput="validateField()">
 		                <label for="url">URL</label>
 		            </div>
 		        </div>
 		        <br/>
-		        <button type="submit" name="action" class="waves-effect waves-light btn" style="width:100%;">Upload</button>
+		        <button id="uploadBtn" type="submit" name="action" class="waves-effect waves-light btn" style="width:100%;">Upload</button>
 		    </form>
 		</div>
 		<br/>
