@@ -3,39 +3,37 @@
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="css/css.css"" rel="stylesheet">
+    <link href="css/css.css"" rel="stylesheet">
         <link href="js/toastr.min.css"  rel="stylesheet" >
-	<meta charset="UTF-8">
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
-	<script type="text/javascript" src="js/particleground.min.js"></script>
-	
-	<script type="text/javascript"> 
-	var fileInput = null,
-		urlInput = null;
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/particleground.min.js"></script>
+    <script type="text/javascript"> 
+    var fileInput = null,
+        urlInput = null;
 
-	$(document).ready(function() {
-	  $('#upload').particleground({
-	    dotColor: '#1a7269',
-	    lineColor: '#1a7269'
-	  });
-	  document.getElementById("uploadBtn").disabled = true;
-	  fileInput = document.getElementById("inputFile")
-	  urlInput = document.getElementById("url")
-	}); 
+    $(document).ready(function() {
+      $('#upload').particleground({
+        dotColor: '#1a7269',
+        lineColor: '#1a7269'
+      });
+      document.getElementById("uploadBtn").disabled = true;
+      fileInput = document.getElementById("inputFile")
+      urlInput = document.getElementById("url")
+    }); 
 
-	function validateField(){
-		var x = urlInput.className;
-		if(fileInput.value || (urlInput.value && (x.indexOf('invalid') == -1 ))){
-			document.getElementById("uploadBtn").disabled = false;
-		}else{
-			document.getElementById("uploadBtn").disabled = true;
-		}
-	}
-	</script>
-	<script src="js/toastr.min.js"> </script>
-
-	
+    function validateField(){
+        var x = urlInput.className;
+        if(fileInput.value || (urlInput.value && (x.indexOf('invalid') == -1 ))){
+            document.getElementById("uploadBtn").disabled = false;
+        }else{
+            document.getElementById("uploadBtn").disabled = true;
+        }
+    }
+    </script>
+    <script src="js/toastr.min.js"> </script>
+    
         <title>Upload a file</title>
 
         <!--Let browser know website is optimized for mobile-->
@@ -69,12 +67,12 @@ function HumanSize($Bytes)
         //die("Connection failed: " . $conn->connect_error);
     }
 
-	$result = $conn->query("select * from db_file;");
-	$countFiles = $result->num_rows;
-	
+    $result = $conn->query("select * from db_file;");
+    $countFiles = $result->num_rows;
+    
 
-	$result = $conn->query("select id from db_file order by id desc limit 1;"); 
-	$totalFiles = $result->fetch_assoc();
+    $result = $conn->query("select id from db_file order by id desc limit 1;"); 
+    $totalFiles = $result->fetch_assoc();
 
 
     if($_GET["del"] != null)
@@ -157,36 +155,36 @@ function HumanSize($Bytes)
         }
     }
 
-	$result = $conn->query("select * from db_file;");
-	$countFiles = $result->num_rows;
+    $result = $conn->query("select * from db_file;");
+    $countFiles = $result->num_rows;
 
     ?>
 <div id="upload" style="width: 100%; height: 500px;position: relative">
 <div style="position: absolute; top: 0;width: 100%;">
-    <div class="container" style="">	
-		<div class="section">
-		<center><h1> FileUpload 176 </h1></center>	
-		    <form action="#" method="POST" enctype="multipart/form-data">
-		        <div class="file-field input-field" >
-		            <input class="file-path validate" id="inputFile" type="text" style="width: 50%;" onchange="validateField()"/>
+    <div class="container" style="">    
+        <div class="section">
+        <center><h1> FileUpload 176 </h1></center>  
+            <form action="#" method="POST" enctype="multipart/form-data">
+                <div class="file-field input-field" >
+                    <input class="file-path validate" id="inputFile" type="text" style="width: 50%;" onchange="validateField()"/>
 
-		            <div class="btn">
-		                <span>File</span>
-		                <input type="file" name="image"/>
-		            </div>
-		        </div>
-		        <div class="row">
-		            <div class="input-field col s12">
-		                <input name="url" id="url" type="url" class="validate" oninput="validateField()">
-		                <label for="url">URL</label>
-		            </div>
-		        </div>
-		        <br/>
-		        <button id="uploadBtn" type="submit" name="action" class="waves-effect waves-light btn" style="width:100%;">Upload</button>
-		    </form>
-		</div>
-		<br/>
-	</div>
+                    <div class="btn">
+                        <span>File</span>
+                        <input type="file" name="image"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input name="url" id="url" type="url" class="validate" oninput="validateField()">
+                        <label for="url">URL</label>
+                    </div>
+                </div>
+                <br/>
+                <button id="uploadBtn" type="submit" name="action" class="waves-effect waves-light btn" style="width:100%;">Upload</button>
+            </form>
+        </div>
+        <br/>
+    </div>
 </div>
 </div>
 <div class="container">
@@ -198,14 +196,14 @@ function HumanSize($Bytes)
                     <tr>
                         <th data-field="type">Type</th>
                         <th data-field="name">Link</th>
-			<th data-field="name">Size</th>
+            <th data-field="name">Size</th>
                         <th data-field="date">Date</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-		<?php
+        <?php
                     $sql = "SELECT id, url, text, upload_date, ext, size FROM db_file ORDER BY id DESC";
                     $result = $conn->query($sql);
 
@@ -219,7 +217,7 @@ function HumanSize($Bytes)
                             }
                         }
                     }
-            	?>
+                ?>
                 </tbody>
             </table>
         </div>
