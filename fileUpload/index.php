@@ -19,8 +19,8 @@
             lineColor: '#1a7269'
           });
           document.getElementById("uploadBtn").disabled = true;
-          fileInput = document.getElementById("inputFile")
-          urlInput = document.getElementById("url")
+          fileInput = document.getElementById("inputFile");
+          urlInput = document.getElementById("url");
         }); 
 
         function validateField(){
