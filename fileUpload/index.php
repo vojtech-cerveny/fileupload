@@ -186,21 +186,21 @@ function HumanSize($Bytes)
 
                 <tbody>
 
-                    <?php
+		<?php
                     $sql = "SELECT id, url, text, upload_date, ext, size FROM db_file ORDER BY id DESC";
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             if ($row["ext"] == "url") {
-
-                                echo "<tr><td> <i class=\"material-icons grey-text\">change_history</i>  </td><td><a class=\"truncate\" href=\"" . $row["url"] . "\" target=\"_blank\">" . $row["url"] . "</a></td><td></td><td>" . $row["upload_date"] . "</td><td><a class=\"waves-effect waves-light red lighten-3 btn\" href=\"?del=" . $row["id"]."\">Delete</a></td></tr>";
+                                $short =  explode( '/' , $row["url"]);  
+                                echo "<tr><td> <i class=\"material-icons grey-text\">change_history</i>  </td><td><a class=\"truncate\" href=\"" . $row["url"] . "\" target=\"_blank\">" . $short[2] . "/.../" . substr($row["url"], -35) .  "</a></td><td></td><td>" . $row["upload_date"] . "</td><td><a class=\"waves-effect waves-light red lighten-3 btn\" href=\"?del=" . $row["id"]."\">Delete</a></td></tr>";
                             } else {
                                 echo "<tr><td> <i class=\"material-icons grey-text\">" . $row["ext"] . "</i>  </td><td><a href=\"uploads/" . $row["url"] . "\" target=\"_blank\">" . $row["text"] . "</a></td><td>" . HumanSize($row["size"]) . "</td><td>" . $row["upload_date"] . "</td><td><a class=\"waves-effect waves-light red lighten-3 btn\" href=\"?del=" . $row["id"]."\">Delete</a></td></tr>";
                             }
                         }
                     }
-                    ?>
+            	?>
                 </tbody>
             </table>
         </div>
