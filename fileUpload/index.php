@@ -3,36 +3,36 @@
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="css/css.css"" rel="stylesheet">
+        <link href="css/css.css"" rel="stylesheet">
         <link href="js/toastr.min.css"  rel="stylesheet" >
-    <meta charset="UTF-8">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/particleground.min.js"></script>
-    <script type="text/javascript"> 
-    var fileInput = null,
-        urlInput = null;
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/particleground.min.js"></script>
+        <script type="text/javascript"> 
+        var fileInput = null,
+            urlInput = null;
 
-    $(document).ready(function() {
-      $('#upload').particleground({
-        dotColor: '#1a7269',
-        lineColor: '#1a7269'
-      });
-      document.getElementById("uploadBtn").disabled = true;
-      fileInput = document.getElementById("inputFile")
-      urlInput = document.getElementById("url")
-    }); 
+        $(document).ready(function() {
+          $('#upload').particleground({
+            dotColor: '#1a7269',
+            lineColor: '#1a7269'
+          });
+          document.getElementById("uploadBtn").disabled = true;
+          fileInput = document.getElementById("inputFile")
+          urlInput = document.getElementById("url")
+        }); 
 
-    function validateField(){
-        var x = urlInput.className;
-        if(fileInput.value || (urlInput.value && (x.indexOf('invalid') == -1 ))){
-            document.getElementById("uploadBtn").disabled = false;
-        }else{
-            document.getElementById("uploadBtn").disabled = true;
+        function validateField(){
+            var x = urlInput.className;
+            if(fileInput.value || (urlInput.value && (x.indexOf('invalid') == -1 ))){
+                document.getElementById("uploadBtn").disabled = false;
+            }else{
+                document.getElementById("uploadBtn").disabled = true;
+            }
         }
-    }
-    </script>
-    <script src="js/toastr.min.js"> </script>
+        </script>
+        <script src="js/toastr.min.js"> </script>
     
         <title>Upload a file</title>
 
@@ -43,17 +43,17 @@
 
     <?php
 
-function HumanSize($Bytes)
-{
-  $Type=array("", "ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi", "Yi");
-  $Index=0;
-  while($Bytes>=1024)
-  {
-    $Bytes/=1024;
-    $Index++;
-  }
-  return("". round($Bytes, 2)." ".$Type[$Index]."B");
-}
+    function HumanSize($Bytes)
+    {
+      $Type=array("", "ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi", "Yi");
+      $Index=0;
+      while($Bytes>=1024)
+      {
+        $Bytes/=1024;
+        $Index++;
+      }
+      return("". round($Bytes, 2)." ".$Type[$Index]."B");
+    }
 
     $servername = "localhost";
     $username = "";
