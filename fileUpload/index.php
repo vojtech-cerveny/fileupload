@@ -196,14 +196,14 @@
                     <tr>
                         <th data-field="type">Type</th>
                         <th data-field="name">Link</th>
-            <th data-field="name">Size</th>
+                        <th data-field="name">Size</th>
                         <th data-field="date">Date</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-        <?php
+                <?php
                     $sql = "SELECT id, url, text, upload_date, ext, size FROM db_file ORDER BY id DESC";
                     $result = $conn->query($sql);
 
