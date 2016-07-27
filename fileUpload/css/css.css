@@ -1,7 +1,19 @@
 body{
-	background: #40474c;
-	color: #FCF2E9;
+	background: #F6F7FB;
+	color: #616161;
 }
 h1{
 	font-style: italic; font-weight: bold;line-height: 1.5; font-family: Roboto Black;
+}
+th:nth-child(1), td:nth-child(1) {
+    overflow: hidden;
+    width: 67px;
+}
+.circleBase {
+    border-radius: 50%;
+	color: white;
+	padding: 5px;
+}
+table a {
+	color: #26A69A;
 }
