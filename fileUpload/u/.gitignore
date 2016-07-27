@@ -1,0 +1,5 @@
+vendor/*
+tmps/*
+!tmps/empty
+uploads/*
+!uploads/empty
