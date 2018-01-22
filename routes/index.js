@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const fs = require('fs');
-const async = require('async');
 const _ = require('lodash');
 const uploadedFiles = path.join(__dirname, '..', 'uploaded_files/');
 
