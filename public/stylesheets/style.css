@@ -1,0 +1,30 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.ui.action.input input[type="file"] {
+  display: none;
+}
+
+.page-footer {
+  background: #83BD3E;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.btn, .btn-floating {
+  background: #003062;
+}
+
+.btn:hover, .btn-floating:hover {
+  background: #9AAFE6;
+}
