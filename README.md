@@ -11,4 +11,4 @@ A simple nodejs file server for private networks. Recommended to install only on
 # Install and run
 - `yarn install`
 - `yarn start`
-- App is available on `localhost:3000`
+- App is available on `localhost:3200`
