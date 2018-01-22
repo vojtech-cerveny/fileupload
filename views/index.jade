@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  script.
+    var fileInput = null;
+    $(document).ready(function () {
+      $('.modal').modal();
+      fileInput = document.getElementById("inputFile");
+      buttonSubmit = document.getElementById('uploadBtn');
+
+      buttonSubmit.addEventListener("click", function () {
+        $('#modal1').modal('open');
+      });
+    })
+
+    function validateField() {
+      if (fileInput.value) {
+        document.getElementById("uploadBtn").disabled = false;
+      }
+      else {
+        document.getElementById("uploadBtn").disabled = true;
+      }
+    }
+
+  .container
+    .card
+      .card-content
+        h1.center 176
+
+        form(id='uploadForm', action='/', method='post', enctype='multipart/form-data')
+          .file-field.input-field
+            input#inputFile.file-path.validate(type='text', style='width: 50%;', onchange='validateField()')
+            .btn
+              span File
+              input(type='file', name='sampleFile')
+          button#uploadBtn.waves-effect.waves-light.btn(style='width:100%;', disabled='') Upload
+
+    table.striped
+      thead
+        tr
+          th Name
+          th Size
+          th Action
+      each file in files
+        tr
+          td
+            a(href='#{file.url}' target='_blank') #{file.name}
+          td #{file.size}
+          td
+            a.btn-floating.waves-effect.waves-light(href='/remove?file=#{file.name}')
+              i.material-icons delete
+
+  // Modal Structure
+  #modal1.modal
+    .modal-content.center.black.cyan-text.text-accent-3
+      img(src='/images/cat.gif')
+      br
+      h3 Uploading...
