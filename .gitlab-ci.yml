@@ -14,7 +14,7 @@ build_docker:
     - master
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE:latest" .
-    - docker export --output="imageFileUpload.tar" "$CI_REGISTRY_IMAGE:latest"
+    - docker save --output="imageFileUpload.tar" "$CI_REGISTRY_IMAGE:latest"
   artifacts:
     name: 'docker_FU_image.tar'
     when: on_success
