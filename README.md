@@ -12,3 +12,7 @@ A simple nodejs file server for private networks. Recommended to install only on
 - `yarn install`
 - `yarn start`
 - App is available on `localhost:3200`
+
+# Docker build and run
+- $ docker build -t <your-tag-here> .
+- $ docker run -p 3200:3200 -v <your-path>:/usr/src/app <your-tag>
