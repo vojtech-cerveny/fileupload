@@ -10,4 +10,4 @@ RUN yarn install
 COPY . .
 
 EXPOSE 3200
-CMD ["node", "bin/wwww"]
+CMD ["node", "./bin/www"]
