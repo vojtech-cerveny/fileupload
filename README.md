@@ -15,4 +15,4 @@ A simple nodejs file server for private networks. Recommended to install only on
 
 # Docker build and run
 - $ docker build -t <your-tag-here> .
-- $ docker run -p 3200:3200 -v <your-path>:/usr/src/app <your-tag>
+- $ docker run -p 3200:3200 -v <your-path>:/usr/src/app/uploaded_files <your-tag>
