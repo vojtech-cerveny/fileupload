@@ -31,16 +31,19 @@ const sizeOf = function (bytes) {
 
 // File type icons 
 function fileTypeIcon(type){
-  if(type.includes('image')){
+  if(!type){
+    return 'warning';
+  }
+  if(type.includes('image') && !type.includes('gif')){
     return 'image';
   }
-  if(type.includes('exe')){
+  if(type.includes('x-msdos-program')){
     return 'play_circle_outline';
   }
   if(type.includes('pdf')){
     return 'picture_as_pdf';
   }
-  if(type.includes('txt')){
+  if(type.includes('text')){
     return 'text_format';
   }
   if(type.includes('gif')){
