@@ -18,7 +18,9 @@ const storage = multer.diskStorage({
     cb(null, file.fieldname + '-' + Date.now())
   }
 })
-const multerFiles = multer({ storage: storage })
+const multerFiles = multer({ 
+  storage : storage
+})
 
 // Transform bytes to human format
 const sizeOf = function (bytes) {
@@ -103,74 +105,58 @@ const _showFiles = (res) => {
   }).then(files => {
 
     return new Promise((resolve, reject) => {
-      const filesAndFreeSpace = {}      
+      const filesAndFreeSpace = {}
       filesAndFreeSpace.files = files;
-      filesAndFreeSpace.size = {};
-      filesAndFreeSpace.size.pdfCount = 0;
-      filesAndFreeSpace.size.imageCount = 0;
-      filesAndFreeSpace.size.textCount = 0;
-      filesAndFreeSpace.size.gifCount = 0;
-      filesAndFreeSpace.size.videoCount = 0;
-      filesAndFreeSpace.size.zipCount = 0;
-      filesAndFreeSpace.size.exeCount = 0;
-      filesAndFreeSpace.size.otherCount = 0;
-      filesAndFreeSpace.size.pdfSize = 0;
-      filesAndFreeSpace.size.imageSize = 0;
-      filesAndFreeSpace.size.textSize = 0;
-      filesAndFreeSpace.size.gifSize = 0;
-      filesAndFreeSpace.size.videoSize = 0;
-      filesAndFreeSpace.size.zipSize = 0;
-      filesAndFreeSpace.size.exeSize = 0;
-      filesAndFreeSpace.size.otherSize = 0;
-      filesAndFreeSpace.size.pdfIntSize = 0;
-      filesAndFreeSpace.size.imageIntSize = 0;
-      filesAndFreeSpace.size.textIntSize = 0;
-      filesAndFreeSpace.size.gifIntSize = 0;
-      filesAndFreeSpace.size.videoIntSize = 0;
-      filesAndFreeSpace.size.zipIntSize = 0;
-      filesAndFreeSpace.size.exeIntSize = 0;
-      filesAndFreeSpace.size.otherIntSize = 0;
+      filesAndFreeSpace.chartsInfo = {};      
+
+      const itemTypes = ['pdf', 'image', 'text', 'gif', 'video', 'exe', 'zip', 'other'];
+
+      for(let x of itemTypes){
+        filesAndFreeSpace.chartsInfo[x+'Count'] = 0;
+        filesAndFreeSpace.chartsInfo[x+'Size'] = 0;
+        filesAndFreeSpace.chartsInfo[x+'IntSize'] = 0;
+      }
       
       filesAndFreeSpace.files.forEach(function typeSizeCalc(file){
         if( file.icon == 'picture_as_pdf'){
-          filesAndFreeSpace.size.pdfIntSize += file.intSize
-          filesAndFreeSpace.size.pdfCount += 1;
-          filesAndFreeSpace.size.pdfSize = sizeOf(filesAndFreeSpace.size.pdfIntSize)
+          filesAndFreeSpace.chartsInfo.pdfIntSize += file.intSize
+          filesAndFreeSpace.chartsInfo.pdfCount += 1;
+          filesAndFreeSpace.chartsInfo.pdfSize = sizeOf(filesAndFreeSpace.chartsInfo.pdfIntSize)
         }
         else if(file.icon == 'image'){         
-          filesAndFreeSpace.size.imageIntSize += file.intSize
-          filesAndFreeSpace.size.imageCount += 1;
-          filesAndFreeSpace.size.imageSize = sizeOf(filesAndFreeSpace.size.imageIntSize)
+          filesAndFreeSpace.chartsInfo.imageIntSize += file.intSize
+          filesAndFreeSpace.chartsInfo.imageCount += 1;
+          filesAndFreeSpace.chartsInfo.imageSize = sizeOf(filesAndFreeSpace.chartsInfo.imageIntSize)
         }
         else if(file.icon == 'text_format'){         
-          filesAndFreeSpace.size.textIntSize += file.intSize
-          filesAndFreeSpace.size.textCount += 1;
-          filesAndFreeSpace.size.textSize = sizeOf(filesAndFreeSpace.size.textIntSize)
+          filesAndFreeSpace.chartsInfo.textIntSize += file.intSize
+          filesAndFreeSpace.chartsInfo.textCount += 1;
+          filesAndFreeSpace.chartsInfo.textSize = sizeOf(filesAndFreeSpace.chartsInfo.textIntSize)
         }
         else if(file.icon == 'gif'){         
-          filesAndFreeSpace.size.gifIntSize += file.intSize
-          filesAndFreeSpace.size.gifCount += 1;
-          filesAndFreeSpace.size.gifSize = sizeOf(filesAndFreeSpace.size.gifIntSize)
+          filesAndFreeSpace.chartsInfo.gifIntSize += file.intSize
+          filesAndFreeSpace.chartsInfo.gifCount += 1;
+          filesAndFreeSpace.chartsInfo.gifSize = sizeOf(filesAndFreeSpace.chartsInfo.gifIntSize)
         }
         else if(file.icon == 'ondemand_video'){          
-          filesAndFreeSpace.size.videoIntSize += file.intSize
-          filesAndFreeSpace.size.videoCount += 1;
-          filesAndFreeSpace.size.videoSize = sizeOf(filesAndFreeSpace.size.videoIntSize)
+          filesAndFreeSpace.chartsInfo.videoIntSize += file.intSize
+          filesAndFreeSpace.chartsInfo.videoCount += 1;
+          filesAndFreeSpace.chartsInfo.videoSize = sizeOf(filesAndFreeSpace.chartsInfo.videoIntSize)
         }
         else if(file.icon == 'archive'){         
-          filesAndFreeSpace.size.zipIntSize += file.intSize
-          filesAndFreeSpace.size.zipCount += 1;
-          filesAndFreeSpace.size.zipSize = sizeOf(filesAndFreeSpace.size.zipIntSize)
+          filesAndFreeSpace.chartsInfo.zipIntSize += file.intSize
+          filesAndFreeSpace.chartsInfo.zipCount += 1;
+          filesAndFreeSpace.chartsInfo.zipSize = sizeOf(filesAndFreeSpace.chartsInfo.zipIntSize)
         }
         else if(file.icon == 'play_circle_outline'){          
-          filesAndFreeSpace.size.exeIntSize += file.intSize
-          filesAndFreeSpace.size.exeCount += 1;
-          filesAndFreeSpace.size.exeSize = sizeOf(filesAndFreeSpace.size.exeIntSize)
+          filesAndFreeSpace.chartsInfo.exeIntSize += file.intSize
+          filesAndFreeSpace.chartsInfo.exeCount += 1;
+          filesAndFreeSpace.chartsInfo.exeSize = sizeOf(filesAndFreeSpace.chartsInfo.exeIntSize)
         }
         else if(file.icon == 'warning'){          
-          filesAndFreeSpace.size.otherIntSize += file.intSize
-          filesAndFreeSpace.size.otherCount += 1;
-          filesAndFreeSpace.size.otherSize = sizeOf(filesAndFreeSpace.size.otherIntSize)
+          filesAndFreeSpace.chartsInfo.otherIntSize += file.intSize
+          filesAndFreeSpace.chartsInfo.otherCount += 1;
+          filesAndFreeSpace.chartsInfo.otherSize = sizeOf(filesAndFreeSpace.chartsInfo.otherIntSize)
         }
       })
 
@@ -189,12 +175,12 @@ const _showFiles = (res) => {
        });
     });       
   }).then((filesAndFreeSpace) => {     
-   res.render('index', {title: 'Upload', files: _.orderBy(filesAndFreeSpace.files, ['created'], ['desc'], ['icon']), 
+   res.render('index', {title: 'Upload', files: _.orderBy(filesAndFreeSpace.files, ['created'], ['desc']), 
                                          freeSpace : filesAndFreeSpace.freeSpace, free : filesAndFreeSpace.free,
                                          usedSpace : filesAndFreeSpace.usedSpace, used : filesAndFreeSpace.used,
                                          totalSpace : filesAndFreeSpace.totalSpace,
                                          sizeLocation: location,
-                                         json: filesAndFreeSpace.size
+                                         json: filesAndFreeSpace.chartsInfo
                                         });
 
   }).catch((err) => {
