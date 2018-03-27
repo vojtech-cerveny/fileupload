@@ -10,7 +10,6 @@ const index = require('./routes/index');
 const remove = require('./routes/remove');
 
 
-
 const app = express();
 
 // view engine setup

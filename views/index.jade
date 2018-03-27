@@ -13,6 +13,13 @@ block content
       });
     })
 
+    function deleteFile(event){
+      event.preventDefault()
+      document.getElementById("uploadForm").reset();
+      document.getElementById("uploadBtn").disabled = true;
+      document.getElementById("cancelBtn").disabled = true;
+    }
+
     function validateField() {
       if (fileInput.value) {
         document.getElementById("uploadBtn").disabled = false;
@@ -20,12 +27,28 @@ block content
       else {
         document.getElementById("uploadBtn").disabled = true;
       }
+      if (fileInput.value) {
+        document.getElementById("cancelBtn").disabled = false;
+      }
+      else {
+        document.getElementById("cancelBtn").disabled = true;
+      }
     }
-
+    
   .container
     .card
       .card-content
-        h1.center 176
+        h2.center File Upload
+        .divider
+        .section
+           h6 Files and URLs
+           p 
+            | Free space: 
+            span(style='color: #83BD3E') #{freeSpace} 
+            | in 
+            span(style='color: #83BD3E') #{sizeLocation}
+            |   || Actual number of files: 
+            span(style='color: #83BD3E') #{files.length}
 
         form(id='uploadForm', action='/', method='post', enctype='multipart/form-data')
           .file-field.input-field
@@ -33,26 +56,91 @@ block content
             .btn
               span File
               input(type='file', name='sampleFile')
+              span
+            button#cancelBtn.waves-effect.btn-flat.red-text(onclick='deleteFile(event)', disabled='') x
           button#uploadBtn.waves-effect.waves-light.btn(style='width:100%;', disabled='') Upload
 
     table.striped
       thead
         tr
+          th 
           th Name
           th Size
+          th Created
           th Action
       each file in files
         tr
+          td 
+            i#fileIcon.material-icons #{file.icon}
           td
             a(href='#{file.url}' target='_blank') #{file.name}
-          td #{file.size}
+          td #{file.size} 
+          td #{file.created.toLocaleString()}
           td
-            a.btn-floating.waves-effect.waves-light(href='/remove?file=#{file.name}')
+            a.btn-floating.waves-effect.waves-light(href='remove?file=#{file.name}')
               i.material-icons delete
 
   // Modal Structure
   #modal1.modal
     .modal-content.center.black.cyan-text.text-accent-3
-      img(src='/images/cat.gif')
+      img(src='images/cat.gif')
       br
       h3 Uploading...
+
+block charts
+  script.
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawTotalChart);
+    google.charts.setOnLoadCallback(drawUsedChart);
+    function drawTotalChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Percentage');
+      data.addRows([
+        ['Free space (#{freeSpace})', {v: (#{free}), f:'#{freeSpace}'} ],
+        ['Used space (#{usedSpace})', {v: (#{used}), f:'#{usedSpace}'} ],
+      ]);
+      var options = {'title':'Capacity '+'#{totalSpace}',
+                    'pieHole':0.3,
+                    'pieSliceText':'percentage',
+                    'tooltip':{text: 'percentage'},
+                    'width':400,
+                    'height':300};
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'))
+      chart.draw(data, options);
+    };
+    
+    function drawUsedChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Percentage');
+      data.addRows([
+        ['pdf(#{json.pdfCount}) (#{json.pdfSize})', {v: (#{json.pdfIntSize}), f:'#{json.pdfSize}'} ],
+        ['image(#{json.imageCount}) (#{json.imageSize})', {v: (#{json.imageIntSize}), f:'#{json.imageSize}'} ],
+        ['txt(#{json.textCount}) (#{json.textSize})', {v: (#{json.textIntSize}), f:'#{json.textSize}'} ],
+        ['gif(#{json.gifCount}) (#{json.gifSize})', {v: (#{json.gifIntSize}), f:'#{json.gifSize}'} ],
+        ['video(#{json.videoCount}) (#{json.videoSize})', {v: (#{json.videoIntSize}), f:'#{json.videoSize}'} ],
+        ['zip(#{json.zipCount}) (#{json.zipSize})', {v: (#{json.zipIntSize}), f:'#{json.zipSize}'} ],
+        ['exe(#{json.exeCount}) (#{json.exeSize})', {v: (#{json.exeIntSize}), f:'#{json.exeSize}'} ],
+        ['other(#{json.otherCount}) (#{json.otherSize})', {v: (#{json.otherIntSize}), f:'#{json.otherSize}'} ],
+      ]);
+      var options = {'title':'Structure of uploaded files',
+                    'pieHole':0.3,
+                    'pieSliceText':'percentage',
+                    'tooltip':{text: 'percentage'},
+                    'sliceVisibilityThreshold': 0.00000000000000000001,
+                    'width':400,
+                    'height':300,
+                    'chartArea': { }};
+      var chart = new google.visualization.PieChart(document.getElementById('pie_chart'))
+      chart.draw(data, options)
+    };
+
+  .container
+    h4.center Storage capacity
+      table.columns
+        tr
+          td
+            #piechart
+          td
+            #pie_chart

@@ -16,6 +16,18 @@ a {
 .page-footer {
   background: #83BD3E;
 }
+.page-header {
+  height: 80px;
+  position: relative;
+  margin: 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background-color: #002c62;
+  z-index: 99999;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
 
 main {
   flex: 1 0 auto;
@@ -27,4 +39,20 @@ main {
 
 .btn:hover, .btn-floating:hover {
   background: #9AAFE6;
+}
+
+.logo {
+  padding: 5px;
+  display: flex;
+  position: relative;
+}
+
+.name{
+  margin: 0;
+  padding-top: 0px;
+  padding-bottom: 20px;
+}
+
+#cancelBtn{
+  background-color: transparent !important;
 }
