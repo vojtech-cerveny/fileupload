@@ -3,11 +3,15 @@ const _ = require('lodash');
 const diskspace = require('diskspace');
 const mime = require('mime-types');
 const path = require('path');
-
-const location = 'D';
+const os = require('os');
 
 const config = require('../config');
 const storageFolderPath = config.storageFolder;
+
+// TODO: On Linux this has to be re-worked
+const diskSpacelocation = (os.platform() === "win32") ? storageFolderPath.split(path.sep)[0] : "/" ;
+
+console.log(`The files will be stored in: ${storageFolderPath}`);
 
 // Transform bytes to human format
 const sizeOf = function (bytes) {
@@ -148,7 +152,7 @@ const _showFiles = (res) => {
       });
 
 
-      diskspace.check(location, function (err, result) {
+      diskspace.check(diskSpacelocation, function (err, result) {
         if (err) {
           reject(err);
         } else {
@@ -167,12 +171,12 @@ const _showFiles = (res) => {
       freeSpace: filesAndFreeSpace.freeSpace, free: filesAndFreeSpace.free,
       usedSpace: filesAndFreeSpace.usedSpace, used: filesAndFreeSpace.used,
       totalSpace: filesAndFreeSpace.totalSpace,
-      sizeLocation: location,
+      sizeLocation: diskSpacelocation,
       json: filesAndFreeSpace.chartsInfo
     });
 
   }).catch((err) => {
-    res.render('index', {title: 'There was an error check console'});
+    res.render('index', {title: 'Error occurred'});
     console.error(err)
   })
 };
