@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const fs = require('fs-extra');
-const storageFolder = path.join(__dirname, '..', 'uploaded_files/');
+const config = require('../config');
+
+const storageFolder = config.storageFolder;
 
 router.get('/', function (req, res, next) {
   const fileName = req.query.file;

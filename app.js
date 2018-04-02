@@ -4,13 +4,19 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const fileUpload = require('express-fileupload');
+const busboy = require('connect-busboy');
 
 const index = require('./routes/index');
 const remove = require('./routes/remove');
 
 
 const app = express();
+
+// Set-up the busboy middleware
+app.use(busboy({
+  highWaterMark: 2 * 1024 * 1024, // Set 2MiB buffer, so small files are written in one swoop
+}));
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,7 +27,6 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(fileUpload());
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploaded_files', express.static(path.join(__dirname, 'uploaded_files')));
@@ -30,14 +35,14 @@ app.use('/', index);
 app.use('/remove', remove);
 
 
-// catch 404 and forward to error handler
+// Catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
+// Error handler
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
