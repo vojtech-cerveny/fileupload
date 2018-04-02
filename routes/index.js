@@ -3,24 +3,12 @@ const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 const _ = require('lodash');
+const busboy = require('connect-busboy');
 const diskspace = require('diskspace');
-const multer = require('multer');
 const mime = require('mime-types');
 
 const uploadedFiles = path.join(__dirname, '..', 'uploaded_files/');
 const location = 'D'
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, uploadedFiles)
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
-  }
-})
-const multerFiles = multer({
-  storage: storage
-})
 
 // Transform bytes to human format
 const sizeOf = function (bytes) {
@@ -197,7 +185,7 @@ router.get('/', function (req, res, next) {
     });
 });
 
-router.post('/', multerFiles.single('sampleFile'), function (req, res) {
+router.post('/', function (req, res) {
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
 
