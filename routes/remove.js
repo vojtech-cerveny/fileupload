@@ -1,38 +1,30 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const path = require('path');
-const fs = require('fs');
-const uploadedFiles = path.join(__dirname, '..', 'uploaded_files/');
+const fs = require('fs-extra');
+const config = require('../config');
 
-/* GET listing. */
-router.get('/', function(req, res, next) {
-  if (req.query.file) {
-    console.log(req.query.file);
-    new Promise((resolve, reject) => {
-      resolve(path.join(uploadedFiles, req.query.file))
-    })
-      .then(filePath => {
-        console.log(filePath);
-        new Promise((resolve, reject) => {
-          try {
-            fs.stat(filePath, (err) => {
-              if (err) {
-                reject(err);
-              } else {
-                fs.unlink(filePath);
-                resolve();
-              }
-            });
-          } catch (err) {
-            console.log(err);
-          }
-        })
-      })
-      .then(()=> res.redirect('/'))
-      .catch((err) => {
-        console.log(err);
-      })
+const storageFolder = config.storageFolder;
+
+router.get('/', function (req, res, next) {
+  const fileName = req.query.file;
+  const filePath = path.join(storageFolder, req.query.file);
+
+  if (fileName) {
+    console.log(`Going to remove: ${filePath}`);
+
+    try {
+      fs.unlinkSync(filePath);
+      console.log(`Removed ${filePath}`);
+    } catch (err) {
+      console.error(err);
+      res.redirect('/')
+    }
+    res.redirect('/');
+  } else {
+    res.redirect('/');
   }
+
 });
 
 module.exports = router;
