@@ -38,27 +38,24 @@ block content
   .container
     .card
       .card-content
-        h2.center File Upload
-        .divider
-        .section
-           h6 Files and URLs
-           p 
-            | Free space: 
-            span(style='color: #83BD3E') #{freeSpace} 
-            | in 
-            span(style='color: #83BD3E') #{sizeLocation}
-            |   || Actual number of files: 
-            span(style='color: #83BD3E') #{files.length}
 
         form(id='uploadForm', action='/', method='post', enctype='multipart/form-data')
           .file-field.input-field
-            input#inputFile.file-path.validate(type='text', style='width: 50%;', onchange='validateField()')
+            input#inputFile.file-path.validate(type='text', style='width: 70%;', onchange='validateField()')
             .btn
               span File
-              input(type='file', name='sampleFile')
+              input(type='file', name='fileToUpload')
               span
             button#cancelBtn.waves-effect.btn-flat.red-text(onclick='deleteFile(event)', disabled='') x
           button#uploadBtn.waves-effect.waves-light.btn(style='width:100%;', disabled='') Upload
+          .section
+            p
+              | Free space:
+              span(style='color: #83BD3E')  #{freeSpace}
+              |  in
+              span(style='color: #83BD3E')  #{sizeLocation}
+              |   || Number of stored files:
+              span(style='color: #83BD3E')  #{files.length}
 
     table.striped
       thead
