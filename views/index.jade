@@ -57,25 +57,46 @@ block content
               |   || Number of stored files:
               span(style='color: #83BD3E')  #{files.length}
 
+  table.striped.hide-on-med-and-up
+    thead
+      tr
+        th 
+        th Name
+        th Size
+        th Created
+        th Action
+    each file in files
+      tr
+        td 
+          i#fileIcon.material-icons #{file.icon}
+        td
+          a(href='#{file.url}' target='_blank') #{file.name}
+        td #{file.size} 
+        td #{file.created.toLocaleString()}
+        td
+          a.btn-floating.waves-effect.waves-light(href='remove?file=#{file.name}')
+            i.material-icons delete
+  
+  .container.hide-on-small-only
     table.striped
-      thead
-        tr
-          th 
-          th Name
-          th Size
-          th Created
-          th Action
-      each file in files
-        tr
-          td 
-            i#fileIcon.material-icons #{file.icon}
-          td
-            a(href='#{file.url}' target='_blank') #{file.name}
-          td #{file.size} 
-          td #{file.created.toLocaleString()}
-          td
-            a.btn-floating.waves-effect.waves-light(href='remove?file=#{file.name}')
-              i.material-icons delete
+        thead
+          tr
+            th 
+            th Name
+            th Size
+            th Created
+            th Action
+        each file in files
+          tr
+            td 
+              i#fileIcon.material-icons #{file.icon}
+            td
+              a(href='#{file.url}' target='_blank') #{file.name}
+            td #{file.size} 
+            td #{file.created.toLocaleString()}
+            td
+              a.btn-floating.waves-effect.waves-light(href='remove?file=#{file.name}')
+                i.material-icons delete
 
   // Modal Structure
   #modal1.modal
@@ -101,7 +122,7 @@ block charts
                     'pieHole':0.3,
                     'pieSliceText':'percentage',
                     'tooltip':{text: 'percentage'},
-                    'width':400,
+                    'width':'100%',
                     'height':300};
       var chart = new google.visualization.PieChart(document.getElementById('piechart'))
       chart.draw(data, options);
@@ -126,7 +147,7 @@ block charts
                     'pieSliceText':'percentage',
                     'tooltip':{text: 'percentage'},
                     'sliceVisibilityThreshold': 0.00000000000000000001,
-                    'width':400,
+                    'width':'100%',
                     'height':300,
                     'chartArea': { }};
       var chart = new google.visualization.PieChart(document.getElementById('pie_chart'))
@@ -135,9 +156,8 @@ block charts
 
   .container
     h4.center Storage capacity
-      table.columns
-        tr
-          td
+      div.row
+        div.col.s12.m6
             #piechart
-          td
+        div.col.s12.m6
             #pie_chart
