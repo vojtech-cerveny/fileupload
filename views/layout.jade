@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    title= title
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    link(type='text/css', rel='stylesheet', href='materialize/css/materialize.min.css', media='screen,projection')
+    script(type='text/javascript', src='https://code.jquery.com/jquery-3.2.1.min.js')
+    script(type='text/javascript', src='materialize/js/materialize.min.js')
+    script(type="text/javascript" src="https://www.gstatic.com/charts/loader.js")
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='stylesheets/style.css')
+
+  body
+    header.page-header
+      .container
+        .row
+          .col.s3
+            a.logo(href="https://www.profiq.com/", target='_blank')
+              img(src='images/logo.png')
+          .col.s6
+            h2.white-text.center.name 176
+    main
+      block content
+      block charts
+
+    footer.page-footer
+      .container
+        .row
+          .col.l6.s12
+            h5.white-text About
+            p.grey-text.text-lighten-4
+              | Developed for
+              a.grey-text.text-lighten-3(href='http://profiq.com', target='_blank')  profiq
+              |  by Vojtěch Červený.
+          .col.l4.offset-l2.s12
+            h5.white-text Links
+            ul
+              li
+                a.grey-text.text-lighten-3(href='http://profiq.com', target='_blank') Profiq
+              li
+                a.grey-text.text-lighten-3(href='http://gitlab.profiq.com/profiq-infra/176/fileUpload', target='_blank') GIT repository
+              li
+                a.grey-text.text-lighten-3(href='http://cervik.net', target='_blank') cervik.NET
+      .footer-copyright
+        .container
+          | © 2018 profiq
+
+
