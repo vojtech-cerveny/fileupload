@@ -9,6 +9,10 @@ A simple nodejs file server for private networks. Recommended to install only on
 - Node.js
 
 # Install and run
-- `npm install`
-- `npm start`
-- App is available on `localhost:3000`
+- `yarn install`
+- `yarn start`
+- App is available on `localhost:3200`
+
+# Docker build and run
+- $ docker build -t <your-tag-here> .
+- $ docker run -p 3200:3200 -v <your-path>:/usr/src/app/uploaded_files <your-tag>
