@@ -14,7 +14,7 @@ a {
 }
 
 .page-footer {
-  background: #83BD3E;
+  background: #777777;
 }
 .page-header {
   height: 80px;
@@ -22,7 +22,7 @@ a {
   margin: 0px;
   padding-top: 15px;
   padding-bottom: 15px;
-  background-color: #002c62;
+  background-color: #2A2D30;
   z-index: 99999;
   display: flex;
   width: 100%;
@@ -34,23 +34,27 @@ main {
 }
 
 .btn, .btn-floating {
-  background: #003062;
+  background: #BE2B26;
 }
 
 .btn:hover, .btn-floating:hover {
-  background: #9AAFE6;
+  background: rgb(241, 69, 64);
 }
 
 .logo {
   padding: 5px;
-  display: flex;
   position: relative;
+}
+
+.logo img {
+  width: 135px;
 }
 
 .name{
   margin: 0;
-  padding-top: 0px;
+  padding-top: 10px;
   padding-bottom: 20px;
+  float: right
 }
 
 #cancelBtn{
