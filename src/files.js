@@ -12,7 +12,7 @@ const storageFolderPath = config.storageFolder;
 const diskSpacelocation = (os.platform() === "win32") ? storageFolderPath.split(path.sep)[0] : "/" ;
 
 console.log(`The files will be stored in: ${storageFolderPath}`);
-
+console.log(`🚀 app started on port ${config.appPort}`)
 // Transform bytes to human format
 const sizeOf = function (bytes) {
   if (bytes === 0) {
